@@ -1,6 +1,6 @@
-<h3 align="center">
-  <img src="https://raw.githubusercontent.com/kubatru/AFNetworking-RetryPolicy/master/Images/logo.png” alt=“Logo” height=“850”/>
-</h3>
+<p align="center" >
+  <img src="https://raw.githubusercontent.com/kubatru/AFNetworking-RetryPolicy/master/Images/logo.png" alt="AFNetworking+RetryPolicy" title="AFNetworking+RetryPolicy">
+</p>
 
 # AFNetworking+RetryPolicy
 - If the request timed out, you usually have to call the request again by yourself. **AFNetworking+RetryPolicy** handles that for you.
