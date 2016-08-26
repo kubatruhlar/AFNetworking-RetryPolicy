@@ -18,7 +18,6 @@
 
 ## Usage
 - E.g. Simple `GET` request will look like this.
-- You can also turn on the logging in the category to see what happens.
 
 ```objective-c
 	AFHTTPSessionManager *manager = [AFHTTPSessionManager new];
@@ -30,6 +29,8 @@
         
     } retryCount:5 retryInterval:2.0 progressive:false fatalStatusCodes:@[@401, @403]];
 ```
+
+- You can also turn on the logging in the category to see what happens.
 
 ## Author
 - This library is open-sourced by [Jakub Truhlar](http://kubatruhlar.cz).
