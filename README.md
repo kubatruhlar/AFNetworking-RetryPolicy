@@ -36,5 +36,5 @@
 - This library is open-sourced by [Jakub Truhlar](http://kubatruhlar.cz).
     
 ## License
-- Like(:+1:) [AFNetworking](https://github.com/AFNetworking/AFNetworking), this category is under the MIT License (MIT)
+- Like :+1: [AFNetworking](https://github.com/AFNetworking/AFNetworking), this category is under the MIT License (MIT)
 Copyright © 2016 Jakub Truhlar
