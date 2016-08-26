@@ -1,5 +1,5 @@
 <h3 align="center">
-  <img src="https://github.com/kubatru/AFNetworking+RetryPolicy/blob/master/Images/logo.png” alt=“Logo” height=“850”/>
+  <img src="https://raw.githubusercontent.com/kubatru/AFNetworking-RetryPolicy/master/Images/logo.png” alt=“Logo” height=“850”/>
 </h3>
 
 # AFNetworking+RetryPolicy
