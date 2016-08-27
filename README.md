@@ -3,9 +3,9 @@
 </p>
 
 ### Allows you to:
-- [x] How many times to try.
-- [x] Next attempt will always take more time then the previous one if set.
-- [x] Time interval between attempts in seconds.
+- [x] How many times to try
+- [x] Time interval between attempts in seconds
+- [x] Next attempt will always take more time then the previous one if set
 
 - If the request timed out, you usually have to call the request again by yourself. **AFNetworking+RetryPolicy** handles that for you.
  
