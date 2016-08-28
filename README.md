@@ -13,9 +13,14 @@
 - [x] Set fatal status codes. These will trigger failure block immediately when received, ends all retry counts.
 
 ## Installation
-**Category requires [AFNetworking](https://github.com/AFNetworking/AFNetworking) 3.0 and above**
+- **Category uses [AFNetworking](https://github.com/AFNetworking/AFNetworking) 3.0 and above.**
 
-- Add the **AFNetworking+RetryPolicy** category to your project as a regular library.
+- *For [AFNetworking](https://github.com/AFNetworking/AFNetworking) 1.0 support, use branch [`afn1-support`](https://github.com/kubatru/AFNetworking-RetryPolicy/tree/afn1-support). Will not be updated anymore.*
+
+- *For [AFNetworking](https://github.com/AFNetworking/AFNetworking) 2.0 support, use branch [`afn2-support`](https://github.com/kubatru/AFNetworking-RetryPolicy/tree/afn2-support). Will not be updated anymore.*
+
+1. Add the **AFNetworking+RetryPolicy** category to your project as a regular library.
+2. Use `#import "AFNetworking+RetryPolicy.h"`
 
 ## Usage (Example)
 - Simple `GET` request will look like this.
@@ -31,11 +36,13 @@
     } retryCount:5 retryInterval:2.0 progressive:false fatalStatusCodes:@[@401, @403]];
 ```
 
-- You can also turn on the logging in the category to see what happens.
+- You can also turn on the logging in the category to see what happens (`kDebugLoggingEnabled = true`).
 
-## Author
+## Author and credit
 - This library is open-sourced by [Jakub Truhlar](http://kubatruhlar.cz).
+- Based on [@shaioz](https://github.com/shaioz) solution.
+- AFNetworking is owned and maintained by the [Alamofire Software Foundation](http://alamofire.org).
     
 ## License
-- Like :+1: [AFNetworking](https://github.com/AFNetworking/AFNetworking), this category is under the MIT License (MIT)
+- Like :+1: [AFNetworking](https://github.com/AFNetworking/AFNetworking), this category is under the MIT License (MIT).
 Copyright © 2016 Jakub Truhlar
