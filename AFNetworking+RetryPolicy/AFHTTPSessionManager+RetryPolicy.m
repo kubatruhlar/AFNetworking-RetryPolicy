@@ -1,7 +1,7 @@
 //
 // AFNetworking+RetryPolicy.m
 //
-// * Supporting version AFNetworking 3 and above.*
+// * Supporting version AFNetworking 2.*
 //
 // - This library is open-sourced and maintained by Jakub Truhlar.
 // - Based on Shai Ohev Zion's solution.
@@ -60,7 +60,7 @@ static inline void RetryPolicyLog(NSString *log, ...) {
     switch (error.code) {
         case kCFHostErrorHostNotFound:
         case kCFHostErrorUnknown: // Query the kCFGetAddrInfoFailureKey to get the value returned from getaddrinfo; lookup in netdb.h
-        // HTTP errors
+            // HTTP errors
         case kCFErrorHTTPAuthenticationTypeUnsupported:
         case kCFErrorHTTPBadCredentials:
         case kCFErrorHTTPParseFailure:
@@ -70,7 +70,7 @@ static inline void RetryPolicyLog(NSString *log, ...) {
         case kCFErrorPACFileError:
         case kCFErrorPACFileAuth:
         case kCFStreamErrorHTTPSProxyFailureUnexpectedResponseToCONNECTMethod:
-        // Error codes for CFURLConnection and CFURLProtocol
+            // Error codes for CFURLConnection and CFURLProtocol
         case kCFURLErrorUnknown:
         case kCFURLErrorCancelled:
         case kCFURLErrorBadURL:
@@ -91,7 +91,7 @@ static inline void RetryPolicyLog(NSString *log, ...) {
         case kCFURLErrorFileIsDirectory:
         case kCFURLErrorNoPermissionsToReadFile:
         case kCFURLErrorDataLengthExceedsMaximum:
-        // SSL errors
+            // SSL errors
         case kCFURLErrorServerCertificateHasBadDate:
         case kCFURLErrorServerCertificateUntrusted:
         case kCFURLErrorServerCertificateHasUnknownRoot:
@@ -99,9 +99,9 @@ static inline void RetryPolicyLog(NSString *log, ...) {
         case kCFURLErrorClientCertificateRejected:
         case kCFURLErrorClientCertificateRequired:
         case kCFURLErrorCannotLoadFromNetwork:
-        // Cookie errors
+            // Cookie errors
         case kCFHTTPCookieCannotParseCookieFile:
-        // Errors originating from CFNetServices
+            // Errors originating from CFNetServices
         case kCFNetServiceErrorUnknown:
         case kCFNetServiceErrorCollision:
         case kCFNetServiceErrorNotFound:
@@ -109,7 +109,7 @@ static inline void RetryPolicyLog(NSString *log, ...) {
         case kCFNetServiceErrorBadArgument:
         case kCFNetServiceErrorCancel:
         case kCFNetServiceErrorInvalid:
-        // Special case
+            // Special case
         case 101: // null address
         case 102: // Ignore "Frame Load Interrupted" errors. Seen after app store links.
             return YES;
@@ -173,9 +173,9 @@ static inline void RetryPolicyLog(NSString *log, ...) {
 }
 
 #pragma mark - Base
-- (NSURLSessionDataTask *)GET:(NSString *)URLString parameters:(NSDictionary *)parameters progress:(void (^)(NSProgress *))downloadProgress success:(void (^)(NSURLSessionDataTask *task, id responseObject))success failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure retryCount:(NSInteger)retryCount retryInterval:(NSTimeInterval)retryInterval progressive:(bool)progressive fatalStatusCodes:(NSArray<NSNumber *> *)fatalStatusCodes {
+- (NSURLSessionDataTask *)GET:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask *task, id responseObject))success failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure retryCount:(NSInteger)retryCount retryInterval:(NSTimeInterval)retryInterval progressive:(bool)progressive fatalStatusCodes:(NSArray<NSNumber *> *)fatalStatusCodes {
     NSURLSessionDataTask *task = [self requestUrlWithRetryRemaining:retryCount maxRetry:retryCount retryInterval:retryInterval progressive:progressive fatalStatusCodes:fatalStatusCodes originalRequestCreator:^NSURLSessionDataTask *(void (^retryBlock)(NSURLSessionDataTask *, NSError *)) {
-        return [self GET:URLString parameters:parameters progress:downloadProgress success:success failure:retryBlock];
+        return [self GET:URLString parameters:parameters success:success failure:retryBlock];
     } originalFailure:failure];
     return task;
 }
@@ -187,17 +187,17 @@ static inline void RetryPolicyLog(NSString *log, ...) {
     return task;
 }
 
-- (NSURLSessionDataTask *)POST:(NSString *)URLString parameters:(NSDictionary *)parameters progress:(void (^)(NSProgress *))downloadProgress success:(void (^)(NSURLSessionDataTask *task, id responseObject))success failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure retryCount:(NSInteger)retryCount retryInterval:(NSTimeInterval)retryInterval progressive:(bool)progressive fatalStatusCodes:(NSArray<NSNumber *> *)fatalStatusCodes {
+- (NSURLSessionDataTask *)POST:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask *task, id responseObject))success failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure retryCount:(NSInteger)retryCount retryInterval:(NSTimeInterval)retryInterval progressive:(bool)progressive fatalStatusCodes:(NSArray<NSNumber *> *)fatalStatusCodes {
     
     NSURLSessionDataTask *task = [self requestUrlWithRetryRemaining:retryCount maxRetry:retryCount retryInterval:retryInterval progressive:progressive fatalStatusCodes:fatalStatusCodes originalRequestCreator:^NSURLSessionDataTask *(void (^retryBlock)(NSURLSessionDataTask *, NSError *)) {
-        return [self POST:URLString parameters:parameters progress:downloadProgress success:success failure:retryBlock];
+        return [self POST:URLString parameters:parameters success:success failure:retryBlock];
     } originalFailure:failure];
     return task;
 }
 
-- (NSURLSessionDataTask *)POST:(NSString *)URLString parameters:(NSDictionary *)parameters constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block progress:(void (^)(NSProgress *))downloadProgress success:(void (^)(NSURLSessionDataTask *task, id responseObject))success failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure retryCount:(NSInteger)retryCount retryInterval:(NSTimeInterval)retryInterval progressive:(bool)progressive fatalStatusCodes:(NSArray<NSNumber *> *)fatalStatusCodes {
+- (NSURLSessionDataTask *)POST:(NSString *)URLString parameters:(NSDictionary *)parameters constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block success:(void (^)(NSURLSessionDataTask *task, id responseObject))success failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure retryCount:(NSInteger)retryCount retryInterval:(NSTimeInterval)retryInterval progressive:(bool)progressive fatalStatusCodes:(NSArray<NSNumber *> *)fatalStatusCodes {
     NSURLSessionDataTask *task = [self requestUrlWithRetryRemaining:retryCount maxRetry:retryCount retryInterval:retryInterval progressive:progressive fatalStatusCodes:fatalStatusCodes originalRequestCreator:^NSURLSessionDataTask *(void (^retryBlock)(NSURLSessionDataTask *, NSError *)) {
-        return [self POST:URLString parameters:parameters constructingBodyWithBlock:block progress:downloadProgress success:success failure:retryBlock];
+        return [self POST:URLString parameters:parameters constructingBodyWithBlock:block success:success failure:retryBlock];
     } originalFailure:failure];
     return task;
 }
