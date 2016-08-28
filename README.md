@@ -10,6 +10,7 @@
 - [x] How many times to try.
 - [x] Time interval between attempts in seconds.
 - [x] Progressive - next attempt will always take more time then the previous one if set.
+- [x] Set fatal status codes. These will trigger failure block immediately when received, ends all retry counts.
 
 ## Installation
 **Category requires [AFNetworking](https://github.com/AFNetworking/AFNetworking) 3.0 and above**
