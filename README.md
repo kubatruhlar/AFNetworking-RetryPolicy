@@ -15,9 +15,9 @@
 ## Installation
 - **Category uses [AFNetworking](https://github.com/AFNetworking/AFNetworking) 3.0 and above.**
 
-- *For [AFNetworking](https://github.com/AFNetworking/AFNetworking) 1.0 support, use branch [`afn1-support`](https://github.com/kubatru/AFNetworking-RetryPolicy/tree/afn1-support). Will not be updated anymore.*
+- *For [AFNetworking](https://github.com/AFNetworking/AFNetworking) 1 support, use branch [`afn1-support`](https://github.com/kubatru/AFNetworking-RetryPolicy/tree/afn1-support). Will not be updated anymore.*
 
-- *For [AFNetworking](https://github.com/AFNetworking/AFNetworking) 2.0 support, use branch [`afn2-support`](https://github.com/kubatru/AFNetworking-RetryPolicy/tree/afn2-support). Will not be updated anymore.*
+- *For [AFNetworking](https://github.com/AFNetworking/AFNetworking) 2 support, use branch [`afn2-support`](https://github.com/kubatru/AFNetworking-RetryPolicy/tree/afn2-support). Will not be updated anymore.*
 
 1. Add the **AFNetworking+RetryPolicy** category to your project as a regular library.
 2. Use `#import "AFNetworking+RetryPolicy.h"`
@@ -39,7 +39,7 @@
 - You can also turn on the logging in the category to see what happens (`kDebugLoggingEnabled = true`).
 
 ## Author and credit
-- This library is open-sourced by [Jakub Truhlar](http://kubatruhlar.cz).
+- This library is open-sourced and maintained by [Jakub Truhlar](http://kubatruhlar.cz).
 - Based on [@shaioz](https://github.com/shaioz) solution.
 - AFNetworking is owned and maintained by the [Alamofire Software Foundation](http://alamofire.org).
     
