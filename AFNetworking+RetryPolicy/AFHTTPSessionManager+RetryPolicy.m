@@ -1,7 +1,13 @@
 //
-// Created by Jakub Truhlar on 08/16/16. (Based on Shai Ohev Zion's category)
+// AFNetworking+RetryPolicy.m
 //
-// Copyright (c) 2016 Jakub Truhlar. All rights reserved.
+// * Supporting version AFNetworking 3 and above.*
+//
+// - This library is open-sourced and maintained by Jakub Truhlar.
+// - Based on Shai Ohev Zion's solution.
+// - AFNetworking is owned and maintained by the Alamofire Software Foundation.
+//
+// - Copyright (c) 2016 Jakub Truhlar. All rights reserved.
 //
 
 #import "AFHTTPSessionManager+RetryPolicy.h"

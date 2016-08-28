@@ -1,7 +1,13 @@
 //
-// Created by Jakub Truhlar on 08/16/16. (Based on Shai Ohev Zion's category)
+// AFNetworking+RetryPolicy.h
 //
-// Copyright (c) 2016 Jakub Truhlar. All rights reserved.
+// * Supporting version AFNetworking 3 and above.*
+//
+// - This library is open-sourced and maintained by Jakub Truhlar.
+// - Based on Shai Ohev Zion's solution.
+// - AFNetworking is owned and maintained by the Alamofire Software Foundation.
+//
+// - Copyright (c) 2016 Jakub Truhlar. All rights reserved.
 //
 
 #import "Foundation/Foundation.h"
@@ -12,7 +18,7 @@ typedef int (^RetryDelayCalcBlock)(int, int, int); // int totalRetriesAllowed, i
 /**
  *  Adds the ability to set the retry interval, retry count and progressive (uses power rule e.g. interval = 3 -> 3, 9, 27 etc.). `failure` is called no earlier then `retryCount` = 0, only `fatalStatusCodes` finishes the request earlier.
  *
- *  Requires AFNetworking 3.0 and above.
+ *  Supporting version AFNetworking 3 and above.
  *
  *  retryCount       How many times to try. 1 means original call + one retry = 2 attempts.
  *  retryInterval    Time interval between tries in seconds. (Timeout is not running, request is delayed and is not running yet).
