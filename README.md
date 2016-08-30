@@ -4,12 +4,12 @@
 
 - If the request timed out, you usually have to call the request again by yourself. **AFNetworking+RetryPolicy** handles that for you.
  
-- **AFNetworking+RetryPolicy category** adds the ability to set the retry interval, retry count and progressive (uses power rule e.g. interval = 3 -> 3, 9, 27 etc.). `failure` is called no earlier then `retryCount` = 0, only `fatalStatusCodes` finishes the request earlier.
+- **AFNetworking+RetryPolicy category** adds the ability to set the retry interval, retry count and progressive (uses power rule e.g. interval = 3 -> 3, 9, 27 etc.). `failure` is called no earlier than `retryCount` = 0, only `fatalStatusCodes` finishes the request earlier.
 
 ## Allows
 - [x] How many times to try.
 - [x] Time interval between attempts in seconds.
-- [x] Progressive - next attempt will always take more time then the previous one if set.
+- [x] Progressive - next attempt will always take more time than the previous one if set.
 - [x] Set fatal status codes. These will trigger failure block immediately when received, ends all retry counts.
 
 ## Installation
