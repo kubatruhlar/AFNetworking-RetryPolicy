@@ -1,10 +1,10 @@
-[![Version](https://img.shields.io/cocoapods/v/AFNetworking-RetryPolicy.svg)](http://cocoapods.org/pods/AFNetworking-RetryPolicy)
-[![License](https://img.shields.io/cocoapods/l/AFNetworking-RetryPolicy.svg)](http://cocoapods.org/pods/AFNetworking-RetryPolicy)
-[![Platform](https://img.shields.io/cocoapods/p/AFNetworking-RetryPolicy.svg)](http://cocoapods.org/pods/AFNetworking-RetryPolicy)
-
 <p align="center" >
   <img src="https://raw.githubusercontent.com/kubatru/AFNetworking-RetryPolicy/master/Images/logo.png" alt="AFNetworking+RetryPolicy" title="AFNetworking+RetryPolicy">
 </p>
+
+[![Version](https://img.shields.io/cocoapods/v/AFNetworking-RetryPolicy.svg)](http://cocoapods.org/pods/AFNetworking-RetryPolicy)
+[![License](https://img.shields.io/cocoapods/l/AFNetworking-RetryPolicy.svg)](http://cocoapods.org/pods/AFNetworking-RetryPolicy)
+[![Platform](https://img.shields.io/cocoapods/p/AFNetworking-RetryPolicy.svg)](http://cocoapods.org/pods/AFNetworking-RetryPolicy)
 
 - If the request timed out, you usually have to call the request again by yourself. **AFNetworking+RetryPolicy** handles that for you.
  
