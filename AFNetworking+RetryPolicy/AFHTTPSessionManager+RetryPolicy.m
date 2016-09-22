@@ -10,24 +10,32 @@
 // - Copyright (c) 2016 Jakub Truhlar. All rights reserved.
 //
 
-#import "AFHTTPSessionManager+RetryPolicy.h"
-#import "ObjcAssociatedObjectHelpers.h"
+#import <ObjcAssociatedObjectHelpers/ObjcAssociatedObjectHelpers.h>
 
-static bool const kDebugLoggingEnabled = false;
+#import "AFHTTPSessionManager+RetryPolicy.h"
+
+@interface AFHTTPSessionManager()
+
+@property (strong) id tasksDict;
+@property (copy) id retryDelayCalcBlock;
+
+@end
 
 @implementation AFHTTPSessionManager (RetryPolicy)
 
 SYNTHESIZE_ASC_OBJ(__tasksDict, setTasksDict);
 SYNTHESIZE_ASC_OBJ(__retryDelayCalcBlock, setRetryDelayCalcBlock);
+SYNTHESIZE_ASC_PRIMITIVE(__retryPolicyLogMessagesEnabled, setRetryPolicyLogMessagesEnabled, bool);
 
-static inline void RetryPolicyLog(NSString *log, ...) {
-#ifdef DEBUG
-    if (kDebugLoggingEnabled) {
-        va_list args;
-        va_start(args, log);
-        va_end(args);
-        NSLogv([NSString stringWithFormat:@"RetryPolicy: %@", log], args);
+- (void)logMessage:(NSString *)message, ... {
+    if (!self.__retryPolicyLogMessagesEnabled) {
+        return;
     }
+#ifdef DEBUG
+    va_list args;
+    va_start(args, message);
+    va_end(args);
+    NSLogv([NSString stringWithFormat:@"RetryPolicy: %@", message], args);
 #endif
 }
 
@@ -54,6 +62,13 @@ static inline void RetryPolicyLog(NSString *log, ...) {
         [self createTasksDict];
     }
     return self.__tasksDict;
+}
+
+- (bool)retryPolicyLogMessagesEnabled {
+    if (!self.__retryPolicyLogMessagesEnabled) {
+        [self setRetryPolicyLogMessagesEnabled:false];
+    }
+    return self.__retryPolicyLogMessagesEnabled;
 }
 
 - (BOOL)isErrorFatal:(NSError *)error {
@@ -124,21 +139,20 @@ static inline void RetryPolicyLog(NSString *log, ...) {
 - (NSURLSessionDataTask *)requestUrlWithRetryRemaining:(NSInteger)retryRemaining maxRetry:(NSInteger)maxRetry retryInterval:(NSTimeInterval)retryInterval progressive:(bool)progressive fatalStatusCodes:(NSArray<NSNumber *> *)fatalStatusCodes originalRequestCreator:(NSURLSessionDataTask *(^)(void (^)(NSURLSessionDataTask *, NSError *)))taskCreator originalFailure:(void(^)(NSURLSessionDataTask *task, NSError *))failure {
     void(^retryBlock)(NSURLSessionDataTask *, NSError *) = ^(NSURLSessionDataTask *task, NSError *error) {
         if ([self isErrorFatal:error]) {
-            RetryPolicyLog(@"Request failed with fatal error: %@ - Will not try again!", error.localizedDescription);
-            failure(task, error);
+            [self logMessage:@"Request failed with fatal error: %@ - Will not try again!", error.localizedDescription];
             return;
         }
         
         NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
         for (NSNumber *fatalStatusCode in fatalStatusCodes) {
             if (response.statusCode == fatalStatusCode.integerValue) {
-                RetryPolicyLog(@"Request failed with fatal error: %@ - Will not try again!", error.localizedDescription);
+                [self logMessage:@"Request failed with fatal error: %@ - Will not try again!", error.localizedDescription];
                 failure(task, error);
                 return;
             }
         }
         
-        RetryPolicyLog(@"Request failed: %@, %ld attempt/s left", error.localizedDescription, retryRemaining);
+        [self logMessage:@"Request failed: %@, %ld attempt/s left", error.localizedDescription, retryRemaining];
         if (retryRemaining > 0) {
             void (^addRetryOperation)() = ^{
                 [self requestUrlWithRetryRemaining:retryRemaining - 1 maxRetry:maxRetry retryInterval:retryInterval progressive:progressive fatalStatusCodes:fatalStatusCodes originalRequestCreator:taskCreator originalFailure:failure];
@@ -147,11 +161,11 @@ static inline void RetryPolicyLog(NSString *log, ...) {
                 dispatch_time_t delay;
                 if (progressive) {
                     delay = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(pow(retryInterval, (maxRetry - retryRemaining) + 1) * NSEC_PER_SEC));
-                    RetryPolicyLog(@"Delaying the next attempt by %.0f seconds …", pow(retryInterval, (maxRetry - retryRemaining) + 1));
+                    [self logMessage:@"Delaying the next attempt by %.0f seconds …", pow(retryInterval, (maxRetry - retryRemaining) + 1)];
                     
                 } else {
                     delay = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(retryInterval * NSEC_PER_SEC));
-                    RetryPolicyLog(@"Delaying the next attempt by %.0f seconds …", retryInterval);
+                    [self logMessage:@"Delaying the next attempt by %.0f seconds …", retryInterval];
                 }
                 
                 // Not accurate because of "Timer Coalescing and App Nap" - which helps to reduce power consumption.
@@ -164,7 +178,7 @@ static inline void RetryPolicyLog(NSString *log, ...) {
             }
             
         } else {
-            RetryPolicyLog(@"No more attempts left! Will execute the failure block.");
+            [self logMessage:@"No more attempts left! Will execute the failure block."];
             failure(task, error);
         }
     };

@@ -26,7 +26,7 @@
 ## Installation
 1. There are two ways to add the **AFNetworking+RetryPolicy** library to your project. Add it as a regular library or install it through **CocoaPods** with `pod 'AFNetworking+RetryPolicy'`
 
-2. Use `#import "AFNetworking+RetryPolicy.h"`
+2. Use `#import "AFHTTPSessionManager+RetryPolicy.h"`
 
 ## Usage (Example)
 - Simple `GET` request will look like this.
@@ -42,7 +42,7 @@
     } retryCount:5 retryInterval:2.0 progressive:false fatalStatusCodes:@[@401, @403]];
 ```
 
-- You can also turn on the logging in the category to see what happens (`kDebugLoggingEnabled = true`).
+- You can also turn on logging to see what is going on by setting the `AFHTTPSessionManager`’s `retryPolicyLogMessagesEnabled` property to `true`. Is off by default.
 
 ## Author and credit
 - This library is open-sourced and maintained by [Jakub Truhlar](http://kubatruhlar.cz).

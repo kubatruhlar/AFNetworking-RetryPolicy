@@ -10,8 +10,8 @@
 // - Copyright (c) 2016 Jakub Truhlar. All rights reserved.
 //
 
-#import "Foundation/Foundation.h"
-#import "AFHTTPSessionManager.h"
+#import <Foundation/Foundation.h>
+#import <AFNetworking/AFHTTPSessionManager.h>
 
 typedef int (^RetryDelayCalcBlock)(int, int, int); // int totalRetriesAllowed, int retriesRemaining, int delayBetweenIntervalsModifier
 
@@ -27,8 +27,10 @@ typedef int (^RetryDelayCalcBlock)(int, int, int); // int totalRetriesAllowed, i
  */
 @interface AFHTTPSessionManager (RetryPolicy)
 
-@property (strong) id tasksDict;
-@property (copy) id retryDelayCalcBlock;
+/**
+ *   Turns retry policy log messages on. Only in `DEBUG` target. Default is `false`.
+ */
+@property (nonatomic, assign) bool retryPolicyLogMessagesEnabled;
 
 /**
  *   Adds the ability to set the retry interval, retry count and progressive (uses power rule e.g. interval = 3 -> 3, 9, 27 etc.). `failure` is called no earlier than `retryCount` = 0, only `fatalStatusCodes` finishes the request earlier.
