@@ -1,6 +1,6 @@
-[![Version](https://img.shields.io/cocoapods/v/AFNetworking-RetryPolicy.svg)](http://cocoapods.org/pods/SFDraggableDialogView)
-[![License](https://img.shields.io/cocoapods/l/AFNetworking-RetryPolicy.svg)](http://cocoapods.org/pods/SFDraggableDialogView)
-[![Platform](https://img.shields.io/cocoapods/p/AFNetworking-RetryPolicy.svg)](http://cocoapods.org/pods/SFDraggableDialogView)
+[![Version](https://img.shields.io/cocoapods/v/AFNetworking-RetryPolicy.svg)](http://cocoapods.org/pods/AFNetworking-RetryPolicy)
+[![License](https://img.shields.io/cocoapods/l/AFNetworking-RetryPolicy.svg)](http://cocoapods.org/pods/AFNetworking-RetryPolicy)
+[![Platform](https://img.shields.io/cocoapods/p/AFNetworking-RetryPolicy.svg)](http://cocoapods.org/pods/AFNetworking-RetryPolicy)
 
 <p align="center" >
   <img src="https://raw.githubusercontent.com/kubatru/AFNetworking-RetryPolicy/master/Images/logo.png" alt="AFNetworking+RetryPolicy" title="AFNetworking+RetryPolicy">
