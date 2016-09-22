@@ -1,3 +1,7 @@
+[![Version](https://img.shields.io/cocoapods/v/AFNetworking-RetryPolicy.svg)](http://cocoapods.org/pods/SFDraggableDialogView)
+[![License](https://img.shields.io/cocoapods/l/AFNetworking-RetryPolicy.svg)](http://cocoapods.org/pods/SFDraggableDialogView)
+[![Platform](https://img.shields.io/cocoapods/p/AFNetworking-RetryPolicy.svg)](http://cocoapods.org/pods/SFDraggableDialogView)
+
 <p align="center" >
   <img src="https://raw.githubusercontent.com/kubatru/AFNetworking-RetryPolicy/master/Images/logo.png" alt="AFNetworking+RetryPolicy" title="AFNetworking+RetryPolicy">
 </p>
@@ -12,14 +16,16 @@
 - [x] Progressive - next attempt will always take more time than the previous one if set.
 - [x] Set fatal status codes. These will trigger failure block immediately when received, ends all retry counts.
 
-## Installation
+## Requirements
 - **Category uses [AFNetworking](https://github.com/AFNetworking/AFNetworking) 3.0 and above.**
 
 - *For [AFNetworking](https://github.com/AFNetworking/AFNetworking) 1 support, use branch [`afn1-support`](https://github.com/kubatru/AFNetworking-RetryPolicy/tree/afn1-support). Will not be updated anymore.*
 
 - *For [AFNetworking](https://github.com/AFNetworking/AFNetworking) 2 support, use branch [`afn2-support`](https://github.com/kubatru/AFNetworking-RetryPolicy/tree/afn2-support). Will not be updated anymore.*
 
-1. Add the **AFNetworking+RetryPolicy** category to your project as a regular library.
+## Installation
+1. There are two ways to add the **AFNetworking+RetryPolicy** library to your project. Add it as a regular library or install it through **CocoaPods** with `pod 'AFNetworking+RetryPolicy'`
+
 2. Use `#import "AFNetworking+RetryPolicy.h"`
 
 ## Usage (Example)
