@@ -15,6 +15,6 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/kubatru/AFNetworking-RetryPolicy.git', :tag => '1.0.0' }
   s.source_files     = 'AFNetworking+RetryPolicy/*'
   s.framework        = 'Foundation'
-  s.dependency       = 'AFNetworking', '~> 3.0'
+  s.dependency       'AFNetworking', '~> 3.0'
   s.requires_arc     = true
 end
