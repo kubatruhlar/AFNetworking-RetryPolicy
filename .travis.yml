@@ -1,6 +1,6 @@
 # Basic
 language: objective-c
-osx_image: xcode8
+osx_image: xcode6,4
 xcode_scheme: AFNetworking+RetryPolicy
 xcode_workspace: AFNetworking+RetryPolicy project/AFNetworking+RetryPolicy Example.xcworkspace
 
