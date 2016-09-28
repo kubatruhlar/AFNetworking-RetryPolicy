@@ -1,4 +1,9 @@
+# Basic
 language: objective-c
 osx_image: xcode8
-xcode_workspace: AFNetworking+RetryPolicy Example/AFNetworking+RetryPolicy Example.xcworkspace
+xcode_workspace: AFNetworking+RetryPolicy project/AFNetworking+RetryPolicy Example.xcworkspace
 podfile: AFNetworking+RetryPolicy Example/Podfile
+
+# Notifications
+notifications:
+  email: false
