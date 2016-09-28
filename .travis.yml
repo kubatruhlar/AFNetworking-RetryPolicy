@@ -1,0 +1,4 @@
+language: objective-c
+osx_image: xcode8
+xcode_workspace: AFNetworking+RetryPolicy Example/AFNetworking+RetryPolicy Example.xcworkspace
+podfile: AFNetworking+RetryPolicy Example/Podfile
