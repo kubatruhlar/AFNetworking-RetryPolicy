@@ -1,7 +1,7 @@
 # Basic
 language: objective-c
 osx_image: xcode8
-xcode_scheme AFNetworking+RetryPolicy
+xcode_scheme: AFNetworking+RetryPolicy
 xcode_workspace: AFNetworking+RetryPolicy project/AFNetworking+RetryPolicy Example.xcworkspace
 podfile: AFNetworking+RetryPolicy Example/Podfile
 
