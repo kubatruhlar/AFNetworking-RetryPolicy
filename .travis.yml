@@ -1,11 +1,9 @@
 # Basic
 language: objective-c
-osx_image: xcode7.3
-xcode_scheme: AFNetworking+RetryPolicy Example
-xcode_workspace: AFNetworking+RetryPolicy Example/AFNetworking+RetryPolicy Example.xcworkspace
+osx_image: xcode8
 
-# Test on simulator (Does not require code signing)
-xcode_sdk: iphonesimulator9.3
+script: xcodebuild -workspace AFNetworking+RetryPolicy Example/AFNetworking+RetryPolicy Example.xcworkspace -scheme AFNetworking+RetryPolicy Example -sdk iphonesimulator -destination "OS=10.0,name=iPhone SE"
+
 
 # CocoaPods
 podfile: AFNetworking+RetryPolicy Example/Podfile
