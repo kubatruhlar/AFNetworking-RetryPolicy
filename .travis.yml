@@ -1,9 +1,9 @@
+# DO WORK WITH XCODE 8 SINCE xcodebuild IS SUPPORTING IT.
+#
 # Basic
 language: objective-c
 osx_image: xcode8
-
-script: xcodebuild -workspace AFNetworking+RetryPolicy Example/AFNetworking+RetryPolicy Example.xcworkspace -scheme AFNetworking+RetryPolicy Example -sdk iphonesimulator -destination "OS=10.0,name=iPhone SE"
-
+script: xcodebuild -workspace AFNetworking+RetryPolicy\ Example/AFNetworking+RetryPolicy\ Example.xcworkspace -scheme AFNetworking+RetryPolicy Example -sdk iphonesimulator -destination "OS=10.0,name=iPhone SE"
 
 # CocoaPods
 podfile: AFNetworking+RetryPolicy Example/Podfile
@@ -11,3 +11,22 @@ podfile: AFNetworking+RetryPolicy Example/Podfile
 # Notifications
 notifications:
   email: false
+
+# ------------------------------------------------------------
+# DO NOT WORK WITH XCODE 8 SINCE xctools IS NOT SUPPORTING IT.
+#
+## Basic
+#language: objective-c
+#osx_image: xcode7.3
+#xcode_scheme: AFNetworking+RetryPolicy Example
+#xcode_workspace: AFNetworking+RetryPolicy Example/AFNetworking+RetryPolicy Example.xcworkspace
+#
+## Test on simulator (Does not require code signing)
+#xcode_sdk: iphonesimulator9.3
+#
+## CocoaPods
+#podfile: AFNetworking+RetryPolicy Example/Podfile
+#
+## Notifications
+#notifications:
+#email: false
