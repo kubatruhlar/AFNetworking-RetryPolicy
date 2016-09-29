@@ -21,7 +21,7 @@ If a request timed out, you usually have to call that request again by yourself.
 
 - And use `#import "AFHTTPSessionManager+RetryPolicy.h"` directive.
 
-*Or just try it first with `pod try AFNetworking+RetryPolicy`*
+> Or just try it first with `pod try AFNetworking+RetryPolicy`
 
 ## Usage
 - Simple `GET` request with **AFNetworking+RetryPolicy** could look like this:
@@ -41,6 +41,10 @@ If a request timed out, you usually have to call that request again by yourself.
 
 ## Requirements
 - **Category uses [AFNetworking](https://github.com/AFNetworking/AFNetworking) 3.**
+
+| Target        | IDE           |
+| ------------- |:-------------:|
+| iOS 7+        | Xcode 7+      |
 
 - *For [AFNetworking](https://github.com/AFNetworking/AFNetworking) 1 support, use branch [`afn1-support`](https://github.com/kubatru/AFNetworking-RetryPolicy/tree/afn1-support). Will not be updated anymore.*
 
