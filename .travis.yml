@@ -3,7 +3,7 @@
 # Basic
 language: objective-c
 osx_image: xcode8
-script: xcodebuild -workspace AFNetworking+RetryPolicy\ Example/AFNetworking+RetryPolicy\ Example.xcworkspace -scheme AFNetworking+RetryPolicy Example -sdk iphonesimulator -destination "OS=10.0,name=iPhone SE"
+script: xcodebuild -workspace Example/Example.xcworkspace -scheme Example -sdk iphonesimulator10.0
 
 # CocoaPods
 podfile: AFNetworking+RetryPolicy Example/Podfile
