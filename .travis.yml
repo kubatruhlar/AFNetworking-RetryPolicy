@@ -5,7 +5,7 @@ xcode_scheme: AFNetworking+RetryPolicy Example
 xcode_workspace: AFNetworking+RetryPolicy Example/AFNetworking+RetryPolicy Example.xcworkspace
 
 # Test on simulator (Does not require code signing)
-xcode_sdk: iphonesimulator9.3
+xcode_sdk: iphonesimulator10.0
 
 # CocoaPods
 podfile: AFNetworking+RetryPolicy Example/Podfile
