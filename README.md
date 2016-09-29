@@ -1,35 +1,39 @@
-<p align="center" >
-  <img src="https://raw.githubusercontent.com/kubatru/AFNetworking-RetryPolicy/master/Images/logo.png" alt="AFNetworking+RetryPolicy" title="AFNetworking+RetryPolicy">
+<p align="left" >
+  <img src="https://raw.githubusercontent.com/kubatru/AFNetworking-RetryPolicy/master/Images/logo.png" alt="AFNetworking+RetryPolicy" title="AFNetworking+RetryPolicy" width="400">
 </p>
 
-[![Version](https://img.shields.io/cocoapods/v/AFNetworking-RetryPolicy.svg)](http://cocoapods.org/pods/AFNetworking-RetryPolicy)
-[![License](https://img.shields.io/cocoapods/l/AFNetworking-RetryPolicy.svg)](http://cocoapods.org/pods/AFNetworking-RetryPolicy)
-[![Platform](https://img.shields.io/cocoapods/p/AFNetworking-RetryPolicy.svg)](http://cocoapods.org/pods/AFNetworking-RetryPolicy)
+[![Travis](https://travis-ci.org/kubatruhlar/AFNetworking-RetryPolicy.svg)](https://travis-ci.org/kubatruhlar/AFNetworking-RetryPolicy)
+[![Version](https://img.shields.io/cocoapods/v/AFNetworking+RetryPolicy.svg)](http://cocoapods.org/pods/AFNetworking+RetryPolicy)
+[![Platform](https://img.shields.io/cocoapods/p/AFNetworking+RetryPolicy.svg)](http://cocoapods.org/pods/AFNetworking+RetryPolicy)
+[![License](https://img.shields.io/cocoapods/l/AFNetworking+RetryPolicy.svg)](http://cocoapods.org/pods/AFNetworking+RetryPolicy)
+[![Documentation](https://img.shields.io/cocoapods/metrics/doc-percent/AFNetworking+RetryPolicy.svg)](http://cocoadocs.org/docsets/AFNetworking+RetryPolicy/)
 
-- If the request timed out, you usually have to call the request again by yourself. **AFNetworking+RetryPolicy** handles that for you.
+If a request timed out, you usually have to call the request again by yourself. **AFNetworking+RetryPolicy** handles that for you.
  
-- **AFNetworking+RetryPolicy category** adds the ability to set the retry interval, retry count and progressive (uses power rule e.g. interval = 3 -> 3, 9, 27 etc.). `failure` is called no earlier than `retryCount` = 0, only `fatalStatusCodes` finishes the request earlier.
+**AFNetworking+RetryPolicy** is an **objective-c** category that adds the ability to set the retry logic for requests made with [AFNetworking](https://github.com/AFNetworking/AFNetworking).
 
-## Allows
-- [x] How many times to try.
-- [x] Time interval between attempts in seconds.
-- [x] Progressive - next attempt will always take more time than the previous one if set.
-- [x] Set fatal status codes. These will trigger failure block immediately when received, ends all retry counts.
+## Features
+- [x] **retryCount** - How many times to try.
+- [x] **retryInterval** - Time interval between attempts in seconds.
+- [x] **progressive** - Next attempt will always take more time than the previous one. *(Uses Exponentiation)*
+- [x] **fatalStatusCodes** - These will trigger failure block immediately when received and ends current retry.
 
 ## Requirements
-- **Category uses [AFNetworking](https://github.com/AFNetworking/AFNetworking) 3.0 and above.**
+- **Category uses [AFNetworking](https://github.com/AFNetworking/AFNetworking) 3.**
 
 - *For [AFNetworking](https://github.com/AFNetworking/AFNetworking) 1 support, use branch [`afn1-support`](https://github.com/kubatru/AFNetworking-RetryPolicy/tree/afn1-support). Will not be updated anymore.*
 
 - *For [AFNetworking](https://github.com/AFNetworking/AFNetworking) 2 support, use branch [`afn2-support`](https://github.com/kubatru/AFNetworking-RetryPolicy/tree/afn2-support). Will not be updated anymore.*
 
-## Installation
-1. There are two ways to add the **AFNetworking+RetryPolicy** library to your project. Add it as a regular library or install it through **CocoaPods** with `pod 'AFNetworking+RetryPolicy'`
+## Getting started
+- Installing **AFNetworking+RetryPolicy** library in a project through **[CocoaPods](https://cocoapods.org/)** with `pod 'AFNetworking+RetryPolicy'`
 
-2. Use `#import "AFHTTPSessionManager+RetryPolicy.h"`
+- And use `#import "AFHTTPSessionManager+RetryPolicy.h"` directive.
 
-## Usage (Example)
-- Simple `GET` request will look like this.
+*Or just try with `pod try AFNetworking+RetryPolicy`*
+
+## Usage
+- Simple `GET` request with **AFNetworking+RetryPolicy** could look like this:
 
 ```objective-c
 	AFHTTPSessionManager *manager = [AFHTTPSessionManager new];
@@ -42,13 +46,11 @@
     } retryCount:5 retryInterval:2.0 progressive:false fatalStatusCodes:@[@401, @403]];
 ```
 
-- You can also turn on logging to see what is going on by setting the `AFHTTPSessionManager`’s `retryPolicyLogMessagesEnabled` property to `true`. Is off by default.
+- You can also turn-on retry policy logging to see what is happening by setting the `AFHTTPSessionManager`’s `retryPolicyLogMessagesEnabled` property to `true`. Disabled by default.
 
 ## Author and credit
-- This library is open-sourced and maintained by [Jakub Truhlar](http://kubatruhlar.cz).
-- Based on [@shaioz](https://github.com/shaioz) solution.
+- This library is open-sourced and maintained by [Jakub Truhlář](http://kubatruhlar.cz).
 - AFNetworking is owned and maintained by the [Alamofire Software Foundation](http://alamofire.org).
     
 ## License
-- Like :+1: [AFNetworking](https://github.com/AFNetworking/AFNetworking), this category is under the MIT License (MIT).
-Copyright © 2016 Jakub Truhlar
+- Like :+1: [AFNetworking](https://github.com/AFNetworking/AFNetworking), this category is published under the MIT License. See LICENSE.md for details.
