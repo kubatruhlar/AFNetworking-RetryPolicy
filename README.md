@@ -17,11 +17,11 @@ If a request timed out, you usually have to call that request again by yourself.
 - [x] **fatalStatusCodes** - These will trigger failure block immediately when received and ends current retry.
 
 ## Getting started
-- Installing **AFNetworking+RetryPolicy** library in a project through **[CocoaPods](https://cocoapods.org/)** with `pod 'AFNetworking+RetryPolicy'`
+1. Installing **AFNetworking+RetryPolicy** library in a project through **[CocoaPods](https://cocoapods.org/)** with `pod 'AFNetworking+RetryPolicy'`
 
-- And use `#import "AFHTTPSessionManager+RetryPolicy.h"` directive.
+2. And use `#import "AFHTTPSessionManager+RetryPolicy.h"` directive.
 
-> Or just try it first with `pod try AFNetworking+RetryPolicy`
+> Try it first with `pod try AFNetworking+RetryPolicy` command.
 
 ## Usage
 - Simple `GET` request with **AFNetworking+RetryPolicy** could look like this:
@@ -37,14 +37,15 @@ If a request timed out, you usually have to call that request again by yourself.
     } retryCount:5 retryInterval:2.0 progressive:false fatalStatusCodes:@[@401, @403]];
 ```
 
-- You can also turn-on retry policy logging to see what is happening by setting the `AFHTTPSessionManager`’s `retryPolicyLogMessagesEnabled` property to `true`. Disabled by default.
+- **Retry policy logging** - Turn-on to see what is happening by setting the `AFHTTPSessionManager`’s `retryPolicyLogMessagesEnabled` property to `true`. Disabled by default.
 
 ## Requirements
-- **Category uses [AFNetworking](https://github.com/AFNetworking/AFNetworking) 3.**
 
 | Target        | IDE           |
 | ------------- |:-------------:|
 | iOS 7+        | Xcode 7+      |
+
+- **Category uses [AFNetworking](https://github.com/AFNetworking/AFNetworking) 3.**
 
 - *For [AFNetworking](https://github.com/AFNetworking/AFNetworking) 1 support, use branch [`afn1-support`](https://github.com/kubatru/AFNetworking-RetryPolicy/tree/afn1-support). Will not be updated anymore.*
 
