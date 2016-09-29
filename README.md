@@ -1,5 +1,5 @@
 <p align="left" >
-  <img src="https://raw.githubusercontent.com/kubatru/AFNetworking-RetryPolicy/master/Images/logo.png" alt="AFNetworking+RetryPolicy" title="AFNetworking+RetryPolicy" width="400">
+  <img src="https://raw.githubusercontent.com/kubatruhlar/AFNetworking-RetryPolicy/master/Images/logo.png" alt="AFNetworking+RetryPolicy" title="AFNetworking+RetryPolicy" width="400">
 </p>
 
 [![Travis](https://travis-ci.org/kubatruhlar/AFNetworking-RetryPolicy.svg)](https://travis-ci.org/kubatruhlar/AFNetworking-RetryPolicy)
@@ -8,9 +8,7 @@
 [![License](https://img.shields.io/cocoapods/l/AFNetworking+RetryPolicy.svg)](http://cocoapods.org/pods/AFNetworking+RetryPolicy)
 [![Documentation](https://img.shields.io/cocoapods/metrics/doc-percent/AFNetworking+RetryPolicy.svg)](http://cocoadocs.org/docsets/AFNetworking+RetryPolicy/)
 
-If a request timed out, you usually have to call the request again by yourself. **AFNetworking+RetryPolicy** handles that for you.
- 
-**AFNetworking+RetryPolicy** is an **objective-c** category that adds the ability to set the retry logic for requests made with [AFNetworking](https://github.com/AFNetworking/AFNetworking).
+If a request timed out, you usually have to call the request again by yourself. **AFNetworking+RetryPolicy** is an **objective-c** category that adds the ability to set the retry logic for requests made with [AFNetworking](https://github.com/AFNetworking/AFNetworking).
 
 ## Features
 - [x] **retryCount** - How many times to try.
