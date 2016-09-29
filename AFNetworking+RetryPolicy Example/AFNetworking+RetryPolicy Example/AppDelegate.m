@@ -14,6 +14,12 @@ static NSString * const kTestURL = @"http://httpbin.org/get";
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    [[UIApplication sharedApplication].delegate.window makeKeyAndVisible];
+    UIViewController *viewController = [UIViewController new];
+    viewController.view.backgroundColor = [UIColor purpleColor];
+    [UIApplication sharedApplication].delegate.window.rootViewController = viewController;
+    
     // App Transport Security will block this request since App transport security settings is not set. You will see how retry logic working in log.
     [self exampleGETRequest];
     return YES;
