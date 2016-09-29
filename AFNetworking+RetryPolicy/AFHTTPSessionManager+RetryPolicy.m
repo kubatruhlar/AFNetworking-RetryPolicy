@@ -44,7 +44,7 @@ SYNTHESIZE_ASC_PRIMITIVE(__retryPolicyLogMessagesEnabled, setRetryPolicyLogMessa
 }
 
 - (void)createDelayRetryCalcBlock {
-    RetryDelayCalcBlock block = ^int(int totalRetries, int currentRetry, int delayInSecondsSpecified) {
+    RtryDelayCalcBlock block = ^int(int totalRetries, int currentRetry, int delayInSecondsSpecified) {
         return delayInSecondsSpecified;
     };
     [self setRetryDelayCalcBlock:block];
