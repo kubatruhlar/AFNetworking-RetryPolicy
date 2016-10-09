@@ -140,6 +140,7 @@ SYNTHESIZE_ASC_PRIMITIVE(__retryPolicyLogMessagesEnabled, setRetryPolicyLogMessa
     void(^retryBlock)(NSURLSessionDataTask *, NSError *) = ^(NSURLSessionDataTask *task, NSError *error) {
         if ([self isErrorFatal:error]) {
             [self logMessage:@"Request failed with fatal error: %@ - Will not try again!", error.localizedDescription];
+            failure(task, error);
             return;
         }
         
