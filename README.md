@@ -40,16 +40,13 @@ If a request timed out, you usually have to call that request again by yourself.
 - **Retry policy logging** - Turn-on to see what is happening by setting the `AFHTTPSessionManager`’s `retryPolicyLogMessagesEnabled` property to `true`. Disabled by default.
 
 ## Requirements
+- Target iOS 7 or later
+- Xcode 7 or later
+- **[AFNetworking](https://github.com/AFNetworking/AFNetworking) 3.0 or later**
 
-| Target        | IDE           |
-| ------------- |:-------------:|
-| iOS 7+        | Xcode 7+      |
+*For [AFNetworking](https://github.com/AFNetworking/AFNetworking) 1 support, use branch [`afn1-support`](https://github.com/kubatru/AFNetworking-RetryPolicy/tree/afn1-support). Will not be updated anymore.*
 
-- **Category uses [AFNetworking](https://github.com/AFNetworking/AFNetworking) 3.**
-
-- *For [AFNetworking](https://github.com/AFNetworking/AFNetworking) 1 support, use branch [`afn1-support`](https://github.com/kubatru/AFNetworking-RetryPolicy/tree/afn1-support). Will not be updated anymore.*
-
-- *For [AFNetworking](https://github.com/AFNetworking/AFNetworking) 2 support, use branch [`afn2-support`](https://github.com/kubatru/AFNetworking-RetryPolicy/tree/afn2-support). Will not be updated anymore.*
+*For [AFNetworking](https://github.com/AFNetworking/AFNetworking) 2 support, use branch [`afn2-support`](https://github.com/kubatru/AFNetworking-RetryPolicy/tree/afn2-support). Will not be updated anymore.*
 
 ## Author and credit
 - This library is open-sourced and maintained by [Jakub Truhlář](http://kubatruhlar.cz).
