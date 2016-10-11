@@ -17,9 +17,8 @@ If a request timed out, you usually have to call that request again by yourself.
 - [x] **fatalStatusCodes** - These will trigger failure block immediately when received and ends current retry.
 
 ## Getting started
-1. Installing **AFNetworking+RetryPolicy** library in a project through **[CocoaPods](https://cocoapods.org/)** with `pod 'AFNetworking+RetryPolicy'`
-
-2. And use `#import "AFHTTPSessionManager+RetryPolicy.h"` directive.
+- Installing through **[CocoaPods](https://cocoapods.org/)** with `pod 'AFNetworking+RetryPolicy'`
+- Use `#import "AFHTTPSessionManager+RetryPolicy.h"` directive.
 
 > Tip: Try it first with `pod try AFNetworking+RetryPolicy` command.
 
