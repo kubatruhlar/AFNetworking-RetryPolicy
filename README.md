@@ -21,7 +21,7 @@ If a request timed out, you usually have to call that request again by yourself.
 - Installing through **[CocoaPods](https://cocoapods.org/)** with `pod 'AFNetworking+RetryPolicy'`
 - Use `#import "AFHTTPSessionManager+RetryPolicy.h"` directive.
 
-> Tip: Try it first with `pod try AFNetworking+RetryPolicy` command.
+> Want to try it first? Use `pod try AFNetworking+RetryPolicy` command.
 
 ## Usage
 - Simple `GET` request with **AFNetworking+RetryPolicy** could look like this:
