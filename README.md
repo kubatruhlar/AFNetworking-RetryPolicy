@@ -7,6 +7,7 @@
 [![Platform](https://img.shields.io/cocoapods/p/AFNetworking+RetryPolicy.svg)](http://cocoapods.org/pods/AFNetworking+RetryPolicy)
 [![License](https://img.shields.io/cocoapods/l/AFNetworking+RetryPolicy.svg)](http://cocoapods.org/pods/AFNetworking+RetryPolicy)
 [![Documentation](https://img.shields.io/cocoapods/metrics/doc-percent/AFNetworking+RetryPolicy.svg)](http://cocoadocs.org/docsets/AFNetworking+RetryPolicy/)
+[![Gitter](https://img.shields.io/gitter/room/kubatruhlar/AFNetworking+RetryPolicy.svg)](https://gitter.im/AFNetworking-RetryPolicy/Lobby)
 
 If a request timed out, you usually have to call that request again by yourself. **AFNetworking+RetryPolicy** is an **objective-c** category that adds the ability to set the retry logic for requests made with [AFNetworking](https://github.com/AFNetworking/AFNetworking).
 
