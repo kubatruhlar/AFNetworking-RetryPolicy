@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name             = 'AFNetworking+RetryPolicy'
-  spec.version          = '1.0.2'
+  spec.version          = '1.0.3'
   spec.summary          = 'AFNetworking+RetryPolicy is an objective-c category that adds the ability to set the retry logic for requests made with AFNetworking.'
   spec.description      = 'If a request timed out, you usually have to call that request again by yourself. AFNetworking+RetryPolicy is an objective-c category that adds the ability to set the retry logic for requests made with AFNetworking.'
   spec.homepage         = 'https://github.com/kubatruhlar/AFNetworking-RetryPolicy'
@@ -12,7 +12,7 @@ Pod::Spec.new do |spec|
   spec.osx.deployment_target = '10.9'
   spec.watchos.deployment_target = '2.0'
   spec.tvos.deployment_target = '9.0'
-  spec.source           = {:git => 'https://github.com/kubatruhlar/AFNetworking-RetryPolicy.git', :tag => '1.0.2'}
+  spec.source           = {:git => 'https://github.com/kubatruhlar/AFNetworking-RetryPolicy.git', :tag => "#{spec.version}"}
   spec.source_files     = 'AFNetworking+RetryPolicy/*.{h,m}'
   spec.framework        = 'Foundation'
   spec.requires_arc     = true
