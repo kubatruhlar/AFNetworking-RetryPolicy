@@ -8,7 +8,10 @@ Pod::Spec.new do |spec|
   spec.license          = {:type => 'MIT', :file => 'LICENSE.md'}
   spec.author           = 'Jakub Truhlar'
   spec.social_media_url = 'http://kubatruhlar.cz'
-  spec.platform         = :ios, '7.0'
+  spec.ios.deployment_target = '7.0'
+  spec.osx.deployment_target = '10.9'
+  spec.watchos.deployment_target = '2.0'
+  spec.tvos.deployment_target = '9.0'
   spec.source           = {:git => 'https://github.com/kubatruhlar/AFNetworking-RetryPolicy.git', :tag => '1.0.2'}
   spec.source_files     = 'AFNetworking+RetryPolicy/*.{h,m}'
   spec.framework        = 'Foundation'
