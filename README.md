@@ -5,9 +5,9 @@
 [![Travis](https://travis-ci.org/kubatruhlar/AFNetworking-RetryPolicy.svg)](https://travis-ci.org/kubatruhlar/AFNetworking-RetryPolicy)
 [![Version](https://img.shields.io/cocoapods/v/AFNetworking+RetryPolicy.svg)](http://cocoapods.org/pods/AFNetworking+RetryPolicy)
 [![Platform](https://img.shields.io/cocoapods/p/AFNetworking+RetryPolicy.svg)](http://cocoapods.org/pods/AFNetworking+RetryPolicy)
-[![License](https://img.shields.io/cocoapods/l/AFNetworking+RetryPolicy.svg)](http://cocoapods.org/pods/AFNetworking+RetryPolicy)
 [![Documentation](https://img.shields.io/cocoapods/metrics/doc-percent/AFNetworking+RetryPolicy.svg)](http://cocoadocs.org/docsets/AFNetworking+RetryPolicy/)
-[![Gitter](https://img.shields.io/gitter/room/kubatruhlar/AFNetworking+RetryPolicy.svg)](https://gitter.im/AFNetworking-RetryPolicy/Lobby)
+[![Join the chat at https://gitter.im/AFNetworking-RetryPolicy/](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/AFNetworking-RetryPolicy/General?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
+[![License](https://img.shields.io/cocoapods/l/AFNetworking+RetryPolicy.svg)](http://cocoapods.org/pods/AFNetworking+RetryPolicy)
 
 If a request timed out, you usually have to call that request again by yourself. **AFNetworking+RetryPolicy** is an **objective-c** category that adds the ability to set the retry logic for requests made with [AFNetworking](https://github.com/AFNetworking/AFNetworking).
 
@@ -24,6 +24,7 @@ If a request timed out, you usually have to call that request again by yourself.
 > Want to try it first? Use `pod try AFNetworking+RetryPolicy` command.
 
 ## Usage
+### Example
 - Simple `GET` request with **AFNetworking+RetryPolicy** could look like this:
 
 ```objective-c
@@ -36,11 +37,12 @@ If a request timed out, you usually have to call that request again by yourself.
         
     } retryCount:5 retryInterval:2.0 progressive:false fatalStatusCodes:@[@401, @403]];
 ```
-
-- **Retry policy logging** - Turn-on to see what is happening by setting the `AFHTTPSessionManager`’s `retryPolicyLogMessagesEnabled` property to `true`. Disabled by default.
+### Log 
+- Enable to see what is happening by setting the `AFHTTPSessionManager`’s `retryPolicyLogMessagesEnabled` property to `true`. *Disabled by default.*
 
 ## Requirements
 - Target iOS 7 or later
+- Target OS X 10.9 or later
 - Xcode 7 or later
 - **[AFNetworking](https://github.com/AFNetworking/AFNetworking) 3.0 or later**
 
