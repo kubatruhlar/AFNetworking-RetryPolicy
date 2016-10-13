@@ -10,8 +10,6 @@ Pod::Spec.new do |spec|
   spec.social_media_url = 'http://kubatruhlar.cz'
   spec.ios.deployment_target = '7.0'
   spec.osx.deployment_target = '10.9'
-  spec.watchos.deployment_target = '2.0'
-  spec.tvos.deployment_target = '9.0'
   spec.source           = {:git => 'https://github.com/kubatruhlar/AFNetworking-RetryPolicy.git', :tag => "#{spec.version}"}
   spec.source_files     = 'AFNetworking+RetryPolicy/*.{h,m}'
   spec.framework        = 'Foundation'
