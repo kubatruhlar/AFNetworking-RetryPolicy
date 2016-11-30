@@ -41,7 +41,7 @@ If a request timed out, you usually have to call that request again by yourself.
 - Enable to see what is happening by setting the `AFHTTPSessionManager`’s `retryPolicyLogMessagesEnabled` property to `true`. *Disabled by default.*
 
 ## Requirements
-- **[AFNetworking](https://github.com/AFNetworking/AFNetworking) 3.0 or later** *(However [old versions](#Old-versions) are available at the other branches)*
+- **[AFNetworking](https://github.com/AFNetworking/AFNetworking) 3.0 or later** *(However [old versions](#old-versions) are available at the other branches)*
 - Target iOS 7 or later
 - Target OS X 10.9 or later
 - Xcode 7 or later
