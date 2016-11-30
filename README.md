@@ -49,13 +49,13 @@ If a request timed out, you usually have to call that request again by yourself.
 ## Old versions
 #### For [AFNetworking](https://github.com/AFNetworking/AFNetworking) 1 support\*
 - use branch [`afn1-support`](https://github.com/kubatru/AFNetworking-RetryPolicy/tree/afn1-support).
-- Installing through **[CocoaPods](https://cocoapods.org/)** with `pod "AFNetworking+RetryPolicy", git: 'https://github.com/kubatruhlar/AFNetworking-RetryPolicy.git' , branch: 'afn1-support'`
+- Installing through **[CocoaPods](https://cocoapods.org/)** with `pod 'AFNetworking+RetryPolicy', git: 'https://github.com/kubatruhlar/AFNetworking-RetryPolicy.git' , branch: 'afn1-support'`
 
 > \*Will not be updated anymore.
 
 #### For [AFNetworking](https://github.com/AFNetworking/AFNetworking) 2 support\*
 - use branch [`afn2-support`](https://github.com/kubatru/AFNetworking-RetryPolicy/tree/afn2-support).
-- Installing through **[CocoaPods](https://cocoapods.org/)** with `pod "AFNetworking+RetryPolicy", git: 'https://github.com/kubatruhlar/AFNetworking-RetryPolicy.git' , branch: 'afn2-support'`
+- Installing through **[CocoaPods](https://cocoapods.org/)** with `pod 'AFNetworking+RetryPolicy', git: 'https://github.com/kubatruhlar/AFNetworking-RetryPolicy.git' , branch: 'afn2-support'`
 
 > \*Will not be updated anymore.
 
