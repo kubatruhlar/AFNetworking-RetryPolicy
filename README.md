@@ -11,6 +11,14 @@
 
 If a request timed out, you usually have to call that request again by yourself. **AFNetworking+RetryPolicy** is an **objective-c** category that adds the ability to set the retry logic for requests made with [AFNetworking](https://github.com/AFNetworking/AFNetworking).
 
+- [Features](#features)
+- [Getting started](#getting-started)
+- [Usage](#usage)
+- [Requirements](#requirements)
+- [Old versions](#old-versions)
+- [Author and credit](#author-and-credit)
+- [License](#license)
+
 ## Features
 - [x] **retryCount** - How many times to try.
 - [x] **retryInterval** - Time interval between attempts in seconds.
