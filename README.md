@@ -36,7 +36,7 @@ If a request timed out, you usually have to call that request again by yourself.
 - Simple `GET` request with **AFNetworking+RetryPolicy** could look like this:
 
 ```objective-c
-	AFHTTPSessionManager *manager = [AFHTTPSessionManager new];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager new];
     [manager GET:@"foo" parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSLog(@"%@", responseObject);
         
