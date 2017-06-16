@@ -67,4 +67,16 @@ typedef int (^RetryDelayCalcBlock)(int, int, int); // int totalRetriesAllowed, i
  */
 - (NSURLSessionDataTask *)DELETE:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask *task, id responseObject))success failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure retryCount:(NSInteger)retryCount retryInterval:(NSTimeInterval)retryInterval progressive:(bool)progressive fatalStatusCodes:(NSArray<NSNumber *> *)fatalStatusCodes;
 
+/**
+ *   Adds the ability to set the retry interval, retry count and progressive (uses power rule e.g. interval = 3 -> 3, 9, 27 etc.). `failure` is called no earlier than `retryCount` = 0, only `fatalStatusCodes` finishes the request earlier.
+ */
+- (NSURLSessionDataTask *)dataTaskWithRequest:(NSURLRequest *)request
+                               uploadProgress:(void (^)(NSProgress *uploadProgress)) uploadProgressBlock
+                             downloadProgress:(void (^)(NSProgress *downloadProgress)) downloadProgressBlock
+                            completionHandler:(void (^)(NSURLResponse *response, id responseObject,  NSError * error))completionHandler
+                                   retryCount:(NSInteger)retryCount
+                                retryInterval:(NSTimeInterval)retryInterval
+                                  progressive:(bool)progressive
+                             fatalStatusCodes:(NSArray<NSNumber *> *)fatalStatusCodes;
+
 @end

@@ -187,6 +187,62 @@ SYNTHESIZE_ASC_PRIMITIVE(__retryPolicyLogMessagesEnabled, setRetryPolicyLogMessa
     return task;
 }
 
+- (NSURLSessionDataTask *)dataRequestWithRetryRemaining:(NSInteger)retryRemaining maxRetry:(NSInteger)maxRetry retryInterval:(NSTimeInterval)retryInterval progressive:(bool)progressive fatalStatusCodes:(NSArray<NSNumber *> *)fatalStatusCodes originalRequestCreator:(NSURLSessionDataTask *(^)(void (^)(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error)))taskCreator originalCompletionHandler:(void (^)(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error))originalCompletionHandler {
+    
+    void(^retryBlock)(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) = ^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        if (!error) {
+            originalCompletionHandler(response, responseObject, error);
+            return;
+        }
+        
+        if ([self isErrorFatal:error]) {
+            [self logMessage:@"Request failed with fatal error: %@ - Will not try again!", error.localizedDescription];
+            originalCompletionHandler(response, responseObject, error);
+            return;
+        }
+        
+        for (NSNumber *fatalStatusCode in fatalStatusCodes) {
+            if (error.code == fatalStatusCode.integerValue) {
+                [self logMessage:@"Request failed with fatal error: %@ - Will not try again!", error.localizedDescription];
+                originalCompletionHandler(response, responseObject, error);
+                return;
+            }
+        }
+        
+        [self logMessage:@"Request failed: %@, %ld attempt/s left", error.localizedDescription, retryRemaining];
+        if (retryRemaining > 0) {
+            void (^addRetryOperation)() = ^{
+                [self dataRequestWithRetryRemaining:retryRemaining - 1 maxRetry:maxRetry retryInterval:retryInterval progressive:progressive fatalStatusCodes:fatalStatusCodes originalRequestCreator:taskCreator originalCompletionHandler:originalCompletionHandler];
+            };
+            if (retryInterval > 0.0) {
+                dispatch_time_t delay;
+                if (progressive) {
+                    delay = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(pow(retryInterval, (maxRetry - retryRemaining) + 1) * NSEC_PER_SEC));
+                    [self logMessage:@"Delaying the next attempt by %.0f seconds …", pow(retryInterval, (maxRetry - retryRemaining) + 1)];
+                    
+                } else {
+                    delay = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(retryInterval * NSEC_PER_SEC));
+                    [self logMessage:@"Delaying the next attempt by %.0f seconds …", retryInterval];
+                }
+                
+                // Not accurate because of "Timer Coalescing and App Nap" - which helps to reduce power consumption.
+                dispatch_after(delay, dispatch_get_main_queue(), ^(void){
+                    addRetryOperation();
+                });
+                
+            } else {
+                addRetryOperation();
+            }
+            
+        } else {
+            [self logMessage:@"No more attempts left! Will execute the failure block."];
+            originalCompletionHandler(response, responseObject, error);
+        }
+    };
+    NSURLSessionDataTask *task = taskCreator(retryBlock);
+    return task;
+}
+
 #pragma mark - Base
 - (NSURLSessionDataTask *)GET:(NSString *)URLString parameters:(NSDictionary *)parameters progress:(void (^)(NSProgress *))downloadProgress success:(void (^)(NSURLSessionDataTask *task, id responseObject))success failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure retryCount:(NSInteger)retryCount retryInterval:(NSTimeInterval)retryInterval progressive:(bool)progressive fatalStatusCodes:(NSArray<NSNumber *> *)fatalStatusCodes {
     NSURLSessionDataTask *task = [self requestUrlWithRetryRemaining:retryCount maxRetry:retryCount retryInterval:retryInterval progressive:progressive fatalStatusCodes:fatalStatusCodes originalRequestCreator:^NSURLSessionDataTask *(void (^retryBlock)(NSURLSessionDataTask *, NSError *)) {
@@ -235,6 +291,24 @@ SYNTHESIZE_ASC_PRIMITIVE(__retryPolicyLogMessagesEnabled, setRetryPolicyLogMessa
     NSURLSessionDataTask *task = [self requestUrlWithRetryRemaining:retryCount maxRetry:retryCount retryInterval:retryInterval progressive:progressive fatalStatusCodes:fatalStatusCodes originalRequestCreator:^NSURLSessionDataTask *(void (^retryBlock)(NSURLSessionDataTask *, NSError *)) {
         return [self DELETE:URLString parameters:parameters success:success failure:retryBlock];
     } originalFailure:failure];
+    return task;
+}
+
+- (NSURLSessionDataTask *)dataTaskWithRequest:(NSURLRequest *)request
+                               uploadProgress:(void (^)(NSProgress *uploadProgress)) uploadProgressBlock
+                             downloadProgress:(void (^)(NSProgress *downloadProgress)) downloadProgressBlock
+                            completionHandler:(void (^)(NSURLResponse *response, id responseObject,  NSError * error))completionHandler
+                                   retryCount:(NSInteger)retryCount
+                                retryInterval:(NSTimeInterval)retryInterval
+                                  progressive:(bool)progressive
+                             fatalStatusCodes:(NSArray<NSNumber *> *)fatalStatusCodes {
+    
+    NSURLSessionDataTask *task = [self dataRequestWithRetryRemaining:retryCount maxRetry:retryCount retryInterval:retryInterval progressive:progressive fatalStatusCodes:fatalStatusCodes originalRequestCreator:^NSURLSessionDataTask *(void (^retryBlock)(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error)) {
+        NSURLSessionDataTask *dataTask = [self dataTaskWithRequest:request uploadProgress:uploadProgressBlock downloadProgress:downloadProgressBlock completionHandler:retryBlock];
+        [dataTask resume];
+        return dataTask;
+    } originalCompletionHandler:completionHandler];
+    
     return task;
 }
 
