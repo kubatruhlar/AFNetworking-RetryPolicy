@@ -161,9 +161,8 @@ SYNTHESIZE_ASC_PRIMITIVE(__retryPolicyLogMessagesEnabled, setRetryPolicyLogMessa
             if (retryInterval > 0.0) {
                 dispatch_time_t delay;
                 if (progressive) {
-                    delay = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(pow(retryInterval, (maxRetry - retryRemaining) + 1) * NSEC_PER_SEC));
-                    [self logMessage:@"Delaying the next attempt by %.0f seconds …", pow(retryInterval, (maxRetry - retryRemaining) + 1)];
-                    
+                    delay = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(retryInterval * pow(2, maxRetry - retryRemaining) * NSEC_PER_SEC));
+                    [self logMessage:@"Delaying the next attempt by %.0f seconds …", retryInterval * pow(2, maxRetry - retryRemaining)];
                 } else {
                     delay = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(retryInterval * NSEC_PER_SEC));
                     [self logMessage:@"Delaying the next attempt by %.0f seconds …", retryInterval];
