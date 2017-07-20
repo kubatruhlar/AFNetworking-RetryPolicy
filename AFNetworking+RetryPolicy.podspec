@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name             = 'AFNetworking+RetryPolicy'
-  spec.version          = '1.0.3'
+  spec.version          = '1.0.4'
   spec.summary          = 'AFNetworking+RetryPolicy is an objective-c category that adds the ability to set the retry logic for requests made with AFNetworking.'
   spec.description      = 'If a request timed out, you usually have to call that request again by yourself. AFNetworking+RetryPolicy is an objective-c category that adds the ability to set the retry logic for requests made with AFNetworking.'
   spec.homepage         = 'https://github.com/kubatruhlar/AFNetworking-RetryPolicy'
