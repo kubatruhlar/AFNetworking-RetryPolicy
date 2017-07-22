@@ -9,6 +9,7 @@ Pod::Spec.new do |spec|
   spec.author           = 'Jakub Truhlar'
   spec.social_media_url = 'http://kubatruhlar.cz'
   spec.ios.deployment_target = '7.0'
+  spec.tvos.deployment_target = '9.0'
   spec.osx.deployment_target = '10.9'
   spec.source           = {:git => 'https://github.com/kubatruhlar/AFNetworking-RetryPolicy.git', :tag => "#{spec.version}"}
   spec.source_files     = 'AFNetworking+RetryPolicy/*.{h,m}'
