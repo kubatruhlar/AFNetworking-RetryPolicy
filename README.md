@@ -51,7 +51,9 @@ If a request timed out, you usually have to call that request again by yourself.
 ## Requirements
 - **[AFNetworking](https://github.com/AFNetworking/AFNetworking) 3.0 or later** *(However [old versions](#old-versions) are available at the other branches)*
 - Target iOS 7 or later
-- Target OS X 10.9 or later
+- Target OS X/macOS 10.9 or later
+- Target watchOS 2.0 or later
+- Target tvOS 9.0 or later
 - Xcode 7 or later
 
 ## Old versions
