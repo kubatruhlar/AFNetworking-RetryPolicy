@@ -15,6 +15,6 @@ Pod::Spec.new do |spec|
   spec.framework        = 'Foundation'
   spec.requires_arc     = true
   # Dependencies (Operators =, >=, >, <=, < and ~>)
-  spec.dependency       'AFNetworking', '~> 3.0'
+  spec.dependency       'AFNetworking', '~> 4.0'
   spec.dependency       'ObjcAssociatedObjectHelpers', '2.0.1'
 end
