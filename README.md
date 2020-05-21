@@ -37,7 +37,7 @@ If a request timed out, you usually have to call that request again by yourself.
 
 ```objective-c
     AFHTTPSessionManager *manager = [AFHTTPSessionManager new];
-    [manager GET:@"foo" parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+    [manager GET:@"foo" parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSLog(@"%@", responseObject);
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
@@ -49,12 +49,15 @@ If a request timed out, you usually have to call that request again by yourself.
 - Enable to see what is happening by setting the `AFHTTPSessionManager`’s `retryPolicyLogMessagesEnabled` property to `true`. *Disabled by default.*
 
 ## Requirements
-- **[AFNetworking](https://github.com/AFNetworking/AFNetworking) 3.0 or later** *(However [old versions](#old-versions) are available at the other branches)*
+- **[AFNetworking](https://github.com/AFNetworking/AFNetworking) 4.0 
+- see AFNetworking
+
+## Old versions
+- **[AFNetworking](https://github.com/AFNetworking/AFNetworking) 3.0** *(However [old versions](#old-versions) are available at the other branches)*
 - Target iOS 7 or later
 - Target OS X/macOS 10.9 or later
 - Xcode 7 or later
 
-## Old versions
 #### For [AFNetworking](https://github.com/AFNetworking/AFNetworking) 1 support\*
 - use branch [`afn1-support`](https://github.com/kubatru/AFNetworking-RetryPolicy/tree/afn1-support).
 - Installing through **[CocoaPods](https://cocoapods.org/)** with `pod 'AFNetworking+RetryPolicy', git: 'https://github.com/kubatruhlar/AFNetworking-RetryPolicy.git' , branch: 'afn1-support'`

@@ -1,14 +1,14 @@
 //
 // AFNetworking+RetryPolicy.m
 //
-// * Supporting version AFNetworking 3 and above.*
+// * Supporting version AFNetworking 4 and above.*
 //
 // - This library is open-sourced and maintained by Jakub Truhlar.
 // - Based on Shai Ohev Zion's solution.
 // - AFNetworking is owned and maintained by the Alamofire Software Foundation.
 //
 // - Copyright (c) 2016 Jakub Truhlar. All rights reserved.
-//
+// - AFNetworking 4 update: Tomas Vlcek
 
 #import <ObjcAssociatedObjectHelpers/ObjcAssociatedObjectHelpers.h>
 
@@ -155,7 +155,7 @@ SYNTHESIZE_ASC_PRIMITIVE(__retryPolicyLogMessagesEnabled, setRetryPolicyLogMessa
         
         [self logMessage:@"Request failed: %@, %ld attempt/s left", error.localizedDescription, retryRemaining];
         if (retryRemaining > 0) {
-            void (^addRetryOperation)() = ^{
+            void (^addRetryOperation)(void) = ^{
                 [self requestUrlWithRetryRemaining:retryRemaining - 1 maxRetry:maxRetry retryInterval:retryInterval progressive:progressive fatalStatusCodes:fatalStatusCodes originalRequestCreator:taskCreator originalFailure:failure];
             };
             if (retryInterval > 0.0) {
@@ -187,52 +187,108 @@ SYNTHESIZE_ASC_PRIMITIVE(__retryPolicyLogMessagesEnabled, setRetryPolicyLogMessa
 }
 
 #pragma mark - Base
-- (NSURLSessionDataTask *)GET:(NSString *)URLString parameters:(NSDictionary *)parameters progress:(void (^)(NSProgress *))downloadProgress success:(void (^)(NSURLSessionDataTask *task, id responseObject))success failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure retryCount:(NSInteger)retryCount retryInterval:(NSTimeInterval)retryInterval progressive:(bool)progressive fatalStatusCodes:(NSArray<NSNumber *> *)fatalStatusCodes {
+- (nullable NSURLSessionDataTask *)GET:(NSString *)URLString
+                            parameters:(nullable id)parameters
+                               headers:(nullable NSDictionary <NSString *, NSString *> *)headers
+                              progress:(nullable void (^)(NSProgress *downloadProgress))downloadProgress
+                               success:(nullable void (^)(NSURLSessionDataTask *task, id _Nullable responseObject))success
+                               failure:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSError *error))failure
+                            retryCount:(NSInteger)retryCount
+                         retryInterval:(NSTimeInterval)retryInterval progressive:(bool)progressive
+                      fatalStatusCodes:(NSArray<NSNumber *> *)fatalStatusCodes {
     NSURLSessionDataTask *task = [self requestUrlWithRetryRemaining:retryCount maxRetry:retryCount retryInterval:retryInterval progressive:progressive fatalStatusCodes:fatalStatusCodes originalRequestCreator:^NSURLSessionDataTask *(void (^retryBlock)(NSURLSessionDataTask *, NSError *)) {
-        return [self GET:URLString parameters:parameters progress:downloadProgress success:success failure:retryBlock];
+        return [self GET:URLString parameters:parameters headers:headers progress:downloadProgress success:success failure:retryBlock];
     } originalFailure:failure];
     return task;
 }
 
-- (NSURLSessionDataTask *)HEAD:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask *task))success failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure retryCount:(NSInteger)retryCount retryInterval:(NSTimeInterval)retryInterval progressive:(bool)progressive fatalStatusCodes:(NSArray<NSNumber *> *)fatalStatusCodes {
+- (nullable NSURLSessionDataTask *)HEAD:(NSString *)URLString
+                             parameters:(nullable id)parameters
+                                headers:(nullable NSDictionary <NSString *, NSString *> *)headers
+                                success:(nullable void (^)(NSURLSessionDataTask *task))success
+                                failure:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSError *error))failure
+                             retryCount:(NSInteger)retryCount
+                          retryInterval:(NSTimeInterval)retryInterval
+                            progressive:(bool)progressive
+                       fatalStatusCodes:(NSArray<NSNumber *> *)fatalStatusCodes {
     NSURLSessionDataTask *task = [self requestUrlWithRetryRemaining:retryCount maxRetry:retryCount retryInterval:retryInterval progressive:progressive fatalStatusCodes:fatalStatusCodes originalRequestCreator:^NSURLSessionDataTask *(void (^retryBlock)(NSURLSessionDataTask *, NSError *)) {
-        return [self HEAD:URLString parameters:parameters success:success failure:retryBlock];
+        return [self HEAD:URLString parameters:parameters headers:headers success:success failure:retryBlock];
     } originalFailure:failure];
     return task;
 }
 
-- (NSURLSessionDataTask *)POST:(NSString *)URLString parameters:(NSDictionary *)parameters progress:(void (^)(NSProgress *))downloadProgress success:(void (^)(NSURLSessionDataTask *task, id responseObject))success failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure retryCount:(NSInteger)retryCount retryInterval:(NSTimeInterval)retryInterval progressive:(bool)progressive fatalStatusCodes:(NSArray<NSNumber *> *)fatalStatusCodes {
-    
+- (nullable NSURLSessionDataTask *)POST:(NSString *)URLString
+                             parameters:(nullable id)parameters
+                                headers:(nullable NSDictionary <NSString *, NSString *> *)headers
+                               progress:(nullable void (^)(NSProgress *uploadProgress))uploadProgress
+                                success:(nullable void (^)(NSURLSessionDataTask *task, id _Nullable responseObject))success
+                                failure:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSError *error))failure
+                             retryCount:(NSInteger)retryCount
+                          retryInterval:(NSTimeInterval)retryInterval
+                            progressive:(bool)progressive
+                       fatalStatusCodes:(NSArray<NSNumber *> *)fatalStatusCodes {
     NSURLSessionDataTask *task = [self requestUrlWithRetryRemaining:retryCount maxRetry:retryCount retryInterval:retryInterval progressive:progressive fatalStatusCodes:fatalStatusCodes originalRequestCreator:^NSURLSessionDataTask *(void (^retryBlock)(NSURLSessionDataTask *, NSError *)) {
-        return [self POST:URLString parameters:parameters progress:downloadProgress success:success failure:retryBlock];
+        return [self POST:URLString parameters:parameters headers:headers progress:uploadProgress success:success failure:retryBlock];
     } originalFailure:failure];
     return task;
 }
 
-- (NSURLSessionDataTask *)POST:(NSString *)URLString parameters:(NSDictionary *)parameters constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block progress:(void (^)(NSProgress *))downloadProgress success:(void (^)(NSURLSessionDataTask *task, id responseObject))success failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure retryCount:(NSInteger)retryCount retryInterval:(NSTimeInterval)retryInterval progressive:(bool)progressive fatalStatusCodes:(NSArray<NSNumber *> *)fatalStatusCodes {
+- (nullable NSURLSessionDataTask *)POST:(NSString *)URLString
+                             parameters:(nullable id)parameters
+                                headers:(nullable NSDictionary <NSString *, NSString *> *)headers
+              constructingBodyWithBlock:(nullable void (^)(id <AFMultipartFormData> formData))block
+                               progress:(nullable void (^)(NSProgress *uploadProgress))uploadProgress
+                                success:(nullable void (^)(NSURLSessionDataTask *task, id _Nullable responseObject))success
+                                failure:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSError *error))failure
+                             retryCount:(NSInteger)retryCount
+                          retryInterval:(NSTimeInterval)retryInterval
+                            progressive:(bool)progressive
+                       fatalStatusCodes:(NSArray<NSNumber *> *)fatalStatusCodes {
     NSURLSessionDataTask *task = [self requestUrlWithRetryRemaining:retryCount maxRetry:retryCount retryInterval:retryInterval progressive:progressive fatalStatusCodes:fatalStatusCodes originalRequestCreator:^NSURLSessionDataTask *(void (^retryBlock)(NSURLSessionDataTask *, NSError *)) {
-        return [self POST:URLString parameters:parameters constructingBodyWithBlock:block progress:downloadProgress success:success failure:retryBlock];
+        return [self POST:URLString parameters:parameters headers:headers constructingBodyWithBlock:block progress:uploadProgress success:success failure:retryBlock];
     } originalFailure:failure];
     return task;
 }
 
-- (NSURLSessionDataTask *)PUT:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask *task, id responseObject))success failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure retryCount:(NSInteger)retryCount retryInterval:(NSTimeInterval)retryInterval progressive:(bool)progressive fatalStatusCodes:(NSArray<NSNumber *> *)fatalStatusCodes {
+- (nullable NSURLSessionDataTask *)PUT:(NSString *)URLString
+                            parameters:(nullable id)parameters
+                               headers:(nullable NSDictionary <NSString *, NSString *> *)headers
+                               success:(nullable void (^)(NSURLSessionDataTask *task, id _Nullable responseObject))success
+                               failure:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSError *error))failure
+                            retryCount:(NSInteger)retryCount
+                         retryInterval:(NSTimeInterval)retryInterval
+                           progressive:(bool)progressive
+                      fatalStatusCodes:(NSArray<NSNumber *> *)fatalStatusCodes {
     NSURLSessionDataTask *task = [self requestUrlWithRetryRemaining:retryCount maxRetry:retryCount retryInterval:retryInterval progressive:progressive fatalStatusCodes:fatalStatusCodes originalRequestCreator:^NSURLSessionDataTask *(void (^retryBlock)(NSURLSessionDataTask *, NSError *)) {
-        return [self PUT:URLString parameters:parameters success:success failure:retryBlock];
+        return [self PUT:URLString parameters:parameters headers:headers success:success failure:retryBlock];
     } originalFailure:failure];
     return task;
 }
 
-- (NSURLSessionDataTask *)PATCH:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask *task, id responseObject))success failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure retryCount:(NSInteger)retryCount retryInterval:(NSTimeInterval)retryInterval progressive:(bool)progressive fatalStatusCodes:(NSArray<NSNumber *> *)fatalStatusCodes {
+- (nullable NSURLSessionDataTask *)PATCH:(NSString *)URLString
+                              parameters:(nullable id)parameters
+                                 headers:(nullable NSDictionary <NSString *, NSString *> *)headers
+                                 success:(nullable void (^)(NSURLSessionDataTask *task, id _Nullable responseObject))success
+                                 failure:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSError *error))failure
+                              retryCount:(NSInteger)retryCount retryInterval:(NSTimeInterval)retryInterval
+                             progressive:(bool)progressive
+                        fatalStatusCodes:(NSArray<NSNumber *> *)fatalStatusCodes {
     NSURLSessionDataTask *task = [self requestUrlWithRetryRemaining:retryCount maxRetry:retryCount retryInterval:retryInterval progressive:progressive fatalStatusCodes:fatalStatusCodes originalRequestCreator:^NSURLSessionDataTask *(void (^retryBlock)(NSURLSessionDataTask *, NSError *)) {
-        return [self PATCH:URLString parameters:parameters success:success failure:retryBlock];
+        return [self PATCH:URLString parameters:parameters headers:headers success:success failure:retryBlock];
     } originalFailure:failure];
     return task;
 }
 
-- (NSURLSessionDataTask *)DELETE:(NSString *)URLString parameters:(NSDictionary *)parameters success:(void (^)(NSURLSessionDataTask *task, id responseObject))success failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure retryCount:(NSInteger)retryCount retryInterval:(NSTimeInterval)retryInterval progressive:(bool)progressive fatalStatusCodes:(NSArray<NSNumber *> *)fatalStatusCodes {
+- (nullable NSURLSessionDataTask *)DELETE:(NSString *)URLString
+                               parameters:(nullable id)parameters
+                                  headers:(nullable NSDictionary <NSString *, NSString *> *)headers
+                                  success:(nullable void (^)(NSURLSessionDataTask *task, id _Nullable responseObject))success
+                                  failure:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSError *error))failure
+                               retryCount:(NSInteger)retryCount retryInterval:(NSTimeInterval)retryInterval
+                              progressive:(bool)progressive
+                         fatalStatusCodes:(NSArray<NSNumber *> *)fatalStatusCodes {
     NSURLSessionDataTask *task = [self requestUrlWithRetryRemaining:retryCount maxRetry:retryCount retryInterval:retryInterval progressive:progressive fatalStatusCodes:fatalStatusCodes originalRequestCreator:^NSURLSessionDataTask *(void (^retryBlock)(NSURLSessionDataTask *, NSError *)) {
-        return [self DELETE:URLString parameters:parameters success:success failure:retryBlock];
+        return [self DELETE:URLString parameters:parameters headers:headers success:success failure:retryBlock];
     } originalFailure:failure];
     return task;
 }
