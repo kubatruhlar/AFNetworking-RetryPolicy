@@ -20,7 +20,7 @@ static NSString * const kTestURL = @"http://httpbin.org/get";
     viewController.view.backgroundColor = [UIColor purpleColor];
     [UIApplication sharedApplication].delegate.window.rootViewController = viewController;
     
-    // App Transport Security will block this request since App transport security settings is not set. You will see how retry logic working in log.
+    // App Transport Security will block this request (since the App transport security is not set). Check the log to see how retry logic works.
     [self exampleGETRequest];
     return YES;
 }
@@ -28,7 +28,7 @@ static NSString * const kTestURL = @"http://httpbin.org/get";
 - (void)exampleGETRequest {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager new];
     manager.retryPolicyLogMessagesEnabled = true;
-    [manager GET:kTestURL parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+    [manager GET:kTestURL parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSLog(@"Success");
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
