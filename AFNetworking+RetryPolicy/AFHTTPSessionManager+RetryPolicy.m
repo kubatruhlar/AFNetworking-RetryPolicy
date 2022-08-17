@@ -136,11 +136,13 @@ SYNTHESIZE_ASC_PRIMITIVE(__retryPolicyLogMessagesEnabled, setRetryPolicyLogMessa
     return NO;
 }
 
-- (NSURLSessionDataTask *)requestUrlWithRetryRemaining:(NSInteger)retryRemaining maxRetry:(NSInteger)maxRetry retryInterval:(NSTimeInterval)retryInterval progressive:(bool)progressive fatalStatusCodes:(NSArray<NSNumber *> *)fatalStatusCodes originalRequestCreator:(NSURLSessionDataTask *(^)(void (^)(NSURLSessionDataTask *, NSError *)))taskCreator originalFailure:(void(^)(NSURLSessionDataTask *task, NSError *))failure {
+- (NSURLSessionDataTask *)requestUrlWithRetryRemaining:(NSInteger)retryRemaining maxRetry:(NSInteger)maxRetry retryInterval:(NSTimeInterval)retryInterval progressive:(bool)progressive fatalStatusCodes:(NSArray<NSNumber *> *)fatalStatusCodes originalRequestCreator:(NSURLSessionDataTask *(^)(void (^)(NSURLSessionDataTask *, NSError *)))taskCreator originalFailure:(nullable void(^)(NSURLSessionDataTask *task, NSError *))failure {
     void(^retryBlock)(NSURLSessionDataTask *, NSError *) = ^(NSURLSessionDataTask *task, NSError *error) {
         if ([self isErrorFatal:error]) {
             [self logMessage:@"Request failed with fatal error: %@ - Will not try again!", error.localizedDescription];
-            failure(task, error);
+            if (failure) {
+                failure(task, error);
+            }
             return;
         }
         
@@ -148,7 +150,9 @@ SYNTHESIZE_ASC_PRIMITIVE(__retryPolicyLogMessagesEnabled, setRetryPolicyLogMessa
         for (NSNumber *fatalStatusCode in fatalStatusCodes) {
             if (response.statusCode == fatalStatusCode.integerValue) {
                 [self logMessage:@"Request failed with fatal error: %@ - Will not try again!", error.localizedDescription];
-                failure(task, error);
+                if (failure) {
+                    failure(task, error);
+                }
                 return;
             }
         }
@@ -179,7 +183,9 @@ SYNTHESIZE_ASC_PRIMITIVE(__retryPolicyLogMessagesEnabled, setRetryPolicyLogMessa
             
         } else {
             [self logMessage:@"No more attempts left! Will execute the failure block."];
-            failure(task, error);
+            if (failure) {
+                failure(task, error);
+            }
         }
     };
     NSURLSessionDataTask *task = taskCreator(retryBlock);
